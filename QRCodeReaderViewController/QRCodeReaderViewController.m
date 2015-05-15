@@ -204,7 +204,7 @@
     
     self.titleLabel = [[UILabel alloc] init];
     [self.titleLabel setText:@"Scan QRcode"];
-    [self.titleLabel setFont:[UIFont fontWithName : @"DINPro" size : 18]];
+    [self.titleLabel setFont:[UIFont fontWithName : @"DINPro" size : 22]];
     [self.titleLabel setTextColor:[UIColor whiteColor]];
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
     [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
@@ -212,7 +212,7 @@
     
     _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
-    UIFont *font = [UIFont fontWithName:@"EUMIcons-App-Regular" size:40];
+    UIFont *font = [UIFont fontWithName:@"EUMIcons-App-Regular" size:50];
     [_cancelButton.titleLabel setFont:font];
     [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -228,12 +228,13 @@
 {
     NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel,_imgShadow);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(44)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-7-[_cancelButton(30)]" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_cancelButton(30)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]|" options:0 metrics:nil views:views]];
     
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
+
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_navigationBarView]|" options:0 metrics:nil views:views]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imgShadow]|" options:0 metrics:nil views:views]];
