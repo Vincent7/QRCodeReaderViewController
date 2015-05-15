@@ -35,7 +35,7 @@
 @property (strong, nonatomic) UIButton             *cancelButton;
 @property (strong, nonatomic) UILabel             *titleLabel;
 @property (strong, nonatomic) QRCodeReader         *codeReader;
-
+@property (strong, nonatomic) UIImageView         *imgShadow;
 @property (copy, nonatomic) void (^completionBlock) (NSString *);
 
 @end
@@ -217,20 +217,28 @@
     [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     [_navigationBarView addSubview:_cancelButton];
+    
+    _imgShadow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"img-top-bar-shadow"]];
+    _imgShadow.translatesAutoresizingMaskIntoConstraints = NO;
+    [_imgShadow setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:_imgShadow];
 }
 
 - (void)setupAutoLayoutConstraints
 {
-    NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel,_imgShadow);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_navigationBarView(64)][_cameraView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-27-[_cancelButton(30)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_titleLabel]|" options:0 metrics:nil views:views]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_navigationBarView]|" options:0 metrics:nil views:views]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_imgShadow]|" options:0 metrics:nil views:views]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
+    
 //    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cancelButton]-|" options:0 metrics:nil views:views]];
   
 //  if (_switchCameraButton) {

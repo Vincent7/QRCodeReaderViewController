@@ -46,8 +46,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-  CGRect innerRect = CGRectInset(rect, 50, 50);
-    rectWidth = innerRect.size.width;
+  CGRect innerRect = CGRectInset(rect, 50, 30);
+    
   CGFloat minSize = MIN(innerRect.size.width, innerRect.size.height);
   if (innerRect.size.width != minSize) {
     innerRect.origin.x   += (innerRect.size.width - minSize) / 2;
@@ -57,7 +57,7 @@
     innerRect.origin.y    += (innerRect.size.height - minSize) / 2;
     innerRect.size.height = minSize;
   }
-  
+  rectWidth = minSize;
   CGRect offsetRect = CGRectOffset(innerRect, 0, 15);
   
     _overlay.lineDashPattern = @[@(rectWidth/3), @(rectWidth*2/3)];
