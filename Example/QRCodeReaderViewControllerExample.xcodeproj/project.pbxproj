@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF2F0F991B05EB46002533B6 /* EUMIcons-App-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = BF2F0F981B05EB46002533B6 /* EUMIcons-App-Regular.otf */; };
+		BF2F0F9B1B05F0BF002533B6 /* DINPro-Regular-Normal.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BF2F0F9A1B05F0BF002533B6 /* DINPro-Regular-Normal.ttf */; };
 		CE29601E1987F124008FA93B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE29601D1987F124008FA93B /* main.m */; };
 		CE2960211987F124008FA93B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2960201987F124008FA93B /* AppDelegate.m */; };
 		CE2960241987F124008FA93B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2960231987F124008FA93B /* ViewController.m */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BF2F0F981B05EB46002533B6 /* EUMIcons-App-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EUMIcons-App-Regular.otf"; sourceTree = "<group>"; };
+		BF2F0F9A1B05F0BF002533B6 /* DINPro-Regular-Normal.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINPro-Regular-Normal.ttf"; sourceTree = "<group>"; };
 		CE2960181987F124008FA93B /* QRCodeReaderViewControllerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeReaderViewControllerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE29601C1987F124008FA93B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE29601D1987F124008FA93B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 		CE29601B1987F124008FA93B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF2F0F981B05EB46002533B6 /* EUMIcons-App-Regular.otf */,
+				BF2F0F9A1B05F0BF002533B6 /* DINPro-Regular-Normal.ttf */,
 				CE29601C1987F124008FA93B /* Info.plist */,
 				CE29601D1987F124008FA93B /* main.m */,
 			);
@@ -228,7 +234,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2F0F991B05EB46002533B6 /* EUMIcons-App-Regular.otf in Resources */,
 				CE2960271987F124008FA93B /* Main.storyboard in Resources */,
+				BF2F0F9B1B05F0BF002533B6 /* DINPro-Regular-Normal.ttf in Resources */,
 				CE2960291987F124008FA93B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

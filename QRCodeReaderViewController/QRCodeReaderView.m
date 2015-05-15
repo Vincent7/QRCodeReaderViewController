@@ -31,7 +31,9 @@
 
 @end
 
-@implementation QRCodeReaderView
+@implementation QRCodeReaderView{
+    float rectWidth;
+}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -45,7 +47,7 @@
 - (void)drawRect:(CGRect)rect
 {
   CGRect innerRect = CGRectInset(rect, 50, 50);
-  
+    rectWidth = innerRect.size.width;
   CGFloat minSize = MIN(innerRect.size.width, innerRect.size.height);
   if (innerRect.size.width != minSize) {
     innerRect.origin.x   += (innerRect.size.width - minSize) / 2;
@@ -58,8 +60,9 @@
   
   CGRect offsetRect = CGRectOffset(innerRect, 0, 15);
   
-  
-  _overlay.path = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:5].CGPath;
+    _overlay.lineDashPattern = @[@(rectWidth/3), @(rectWidth*2/3)];
+    _overlay.lineDashPhase   = rectWidth/6;
+  _overlay.path = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:0].CGPath;
 }
 
 #pragma mark - Private Methods
@@ -71,8 +74,7 @@
   _overlay.fillColor       = [UIColor clearColor].CGColor;
   _overlay.strokeColor     = [UIColor whiteColor].CGColor;
   _overlay.lineWidth       = 3;
-  _overlay.lineDashPattern = @[@7.0, @7.0];
-  _overlay.lineDashPhase   = 0;
+  
   
   [self.layer addSublayer:_overlay];
 }

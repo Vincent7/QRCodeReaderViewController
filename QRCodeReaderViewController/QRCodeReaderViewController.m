@@ -25,13 +25,15 @@
  */
 
 #import "QRCodeReaderViewController.h"
-#import "QRCameraSwitchButton.h"
+//#import "QRCameraSwitchButton.h"
 #import "QRCodeReaderView.h"
-
+#define kRGB(c) [UIColor colorWithRed : ((c >> 16) & 0xFF) / 255.0 green : ((c >> 8) & 0xFF) / 255.0 blue : (c & 0xFF) / 255.0 alpha : 1.0]
 @interface QRCodeReaderViewController ()
-@property (strong, nonatomic) QRCameraSwitchButton *switchCameraButton;
+//@property (strong, nonatomic) QRCameraSwitchButton *switchCameraButton;
+@property (strong, nonatomic) UIView *navigationBarView;
 @property (strong, nonatomic) QRCodeReaderView     *cameraView;
 @property (strong, nonatomic) UIButton             *cancelButton;
+@property (strong, nonatomic) UILabel             *titleLabel;
 @property (strong, nonatomic) QRCodeReader         *codeReader;
 
 @property (copy, nonatomic) void (^completionBlock) (NSString *);
@@ -76,7 +78,7 @@
     self.codeReader           = codeReader;
     
     if (cancelTitle == nil) {
-      cancelTitle = NSLocalizedString(@"Cancel", @"Cancel");
+      cancelTitle = NSLocalizedString(@"Z", @"Z");
     }
     
     [self setupUIComponentsWithCancelButtonTitle:cancelTitle];
@@ -185,46 +187,66 @@
     _codeReader.previewLayer.connection.videoOrientation = [QRCodeReader videoOrientationFromInterfaceOrientation:orientation];
   }
   
-  if ([_codeReader hasFrontDevice]) {
-    _switchCameraButton = [[QRCameraSwitchButton alloc] init];
-    [_switchCameraButton setTranslatesAutoresizingMaskIntoConstraints:false];
-    [_switchCameraButton addTarget:self action:@selector(switchCameraAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_switchCameraButton];
-  }
+//  if ([_codeReader hasFrontDevice]) {
+//    _switchCameraButton = [[QRCameraSwitchButton alloc] init];
+//    [_switchCameraButton setTranslatesAutoresizingMaskIntoConstraints:false];
+//    [_switchCameraButton addTarget:self action:@selector(switchCameraAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:_switchCameraButton];
+//  }
   
-  self.cancelButton                                       = [[UIButton alloc] init];
-  _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
-  [_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
-  [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-  [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
-  [self.view addSubview:_cancelButton];
+    self.cancelButton = [[UIButton alloc] init];
+  
+    
+    self.navigationBarView = [[UIView alloc] init];
+    self.navigationBarView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.navigationBarView setBackgroundColor:kRGB(0x2A2A2A)];
+    [self.view addSubview:_navigationBarView];
+    
+    self.titleLabel = [[UILabel alloc] init];
+    [self.titleLabel setText:@"Scan QRcode"];
+    [self.titleLabel setFont:[UIFont fontWithName : @"DINPro" size : 18]];
+    [self.titleLabel setTextColor:[UIColor whiteColor]];
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.titleLabel setTextAlignment:NSTextAlignmentCenter];
+    [_navigationBarView addSubview:_titleLabel];
+    
+    _cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [_cancelButton setTitle:cancelButtonTitle forState:UIControlStateNormal];
+    UIFont *font = [UIFont fontWithName:@"EUMIcons-App-Regular" size:40];
+    [_cancelButton.titleLabel setFont:font];
+    [_cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+    [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
+    [_navigationBarView addSubview:_cancelButton];
 }
 
 - (void)setupAutoLayoutConstraints
 {
-  NSDictionary *views = NSDictionaryOfVariableBindings(_cameraView, _cancelButton);
-  
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_cameraView][_cancelButton(40)]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
-  [self.view addConstraints:
-   [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cancelButton]-|" options:0 metrics:nil views:views]];
-  
-  if (_switchCameraButton) {
-    NSDictionary *switchViews = NSDictionaryOfVariableBindings(_switchCameraButton);
+    NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel);
     
-    [self.view addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_switchCameraButton(50)]" options:0 metrics:nil views:switchViews]];
-    [self.view addConstraints:
-     [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_switchCameraButton(70)]|" options:0 metrics:nil views:switchViews]];
-  }
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_navigationBarView(64)][_cameraView]|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-27-[_cancelButton(30)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_titleLabel]|" options:0 metrics:nil views:views]];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_navigationBarView]|" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_cameraView]|" options:0 metrics:nil views:views]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[_cancelButton]-|" options:0 metrics:nil views:views]];
+  
+//  if (_switchCameraButton) {
+//    NSDictionary *switchViews = NSDictionaryOfVariableBindings(_switchCameraButton);
+//    
+//    [self.view addConstraints:
+//     [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_switchCameraButton(50)]" options:0 metrics:nil views:switchViews]];
+//    [self.view addConstraints:
+//     [NSLayoutConstraint constraintsWithVisualFormat:@"H:[_switchCameraButton(70)]|" options:0 metrics:nil views:switchViews]];
+//  }
 }
 
-- (void)switchDeviceInput
-{
-  [_codeReader switchDeviceInput];
-}
+//- (void)switchDeviceInput
+//{
+//  [_codeReader switchDeviceInput];
+//}
 
 #pragma mark - Catching Button Events
 
@@ -241,9 +263,9 @@
   }
 }
 
-- (void)switchCameraAction:(UIButton *)button
-{
-  [self switchDeviceInput];
-}
+//- (void)switchCameraAction:(UIButton *)button
+//{
+//  [self switchDeviceInput];
+//}
 
 @end
