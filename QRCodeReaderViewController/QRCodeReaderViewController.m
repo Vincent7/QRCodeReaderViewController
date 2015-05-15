@@ -78,7 +78,7 @@
     self.codeReader           = codeReader;
     
     if (cancelTitle == nil) {
-      cancelTitle = NSLocalizedString(@"Z", @"Z");
+      cancelTitle = NSLocalizedString(@"C", @"C");
     }
     
     [self setupUIComponentsWithCancelButtonTitle:cancelTitle];
@@ -218,7 +218,7 @@
     [_cancelButton addTarget:self action:@selector(cancelAction:) forControlEvents:UIControlEventTouchUpInside];
     [_navigationBarView addSubview:_cancelButton];
     
-    _imgShadow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"img-top-bar-shadow"]];
+    _imgShadow = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"top-bar-shadow"]];
     _imgShadow.translatesAutoresizingMaskIntoConstraints = NO;
     [_imgShadow setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_imgShadow];
@@ -228,8 +228,8 @@
 {
     NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel,_imgShadow);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-27-[_cancelButton(30)]" options:0 metrics:nil views:views]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(44)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-7-[_cancelButton(30)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_titleLabel]|" options:0 metrics:nil views:views]];
