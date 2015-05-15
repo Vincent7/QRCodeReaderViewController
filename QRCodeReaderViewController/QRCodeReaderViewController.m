@@ -232,7 +232,7 @@
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-7-[_cancelButton(30)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-20-[_titleLabel]|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_titleLabel]|" options:0 metrics:nil views:views]];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_navigationBarView]|" options:0 metrics:nil views:views]];
     
