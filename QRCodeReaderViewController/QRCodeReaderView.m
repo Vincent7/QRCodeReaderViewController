@@ -62,8 +62,8 @@
     CGRect offsetRect = CGRectOffset(innerRect, 0, 15);
 
     _overlay.lineDashPattern = @[@(rectWidth/3), @(rectWidth*2/3)];
-    _overlay.lineDashPhase   = rectWidth/6;
-    _overlay.path = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:0].CGPath;
+    _overlay.lineDashPhase   = rectWidth*1.0/6.0+2;
+    _overlay.path = [UIBezierPath bezierPathWithRoundedRect:offsetRect cornerRadius:1].CGPath;
     
 //    CGContextRef context = UIGraphicsGetCurrentContext();
     CGMutablePathRef path = CGPathCreateMutable();

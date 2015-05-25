@@ -239,10 +239,10 @@
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_cancelButton(30)]" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-4-[_cancelButton(60)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_helpButton(30)]" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_helpButton(60)]-4-|" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_helpButton(60)]-0-|" options:0 metrics:nil views:views]];
     
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]|" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_titleLabel]|" options:0 metrics:nil views:views]];
