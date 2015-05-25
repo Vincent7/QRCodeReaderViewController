@@ -41,11 +41,10 @@
     static dispatch_once_t onceToken;
     
     dispatch_once(&onceToken, ^{
-      reader                        = [QRCodeReaderViewController new];
-      reader.modalPresentationStyle = UIModalPresentationFormSheet;
+        reader                        = [QRCodeReaderViewController new];
+        reader.modalPresentationStyle = UIModalPresentationFormSheet;
     });
     reader.delegate = self;
-    
     [reader setCompletionWithBlock:^(NSString *resultAsString) {
       NSLog(@"Completion with result: %@", resultAsString);
     }];

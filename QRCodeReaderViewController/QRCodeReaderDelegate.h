@@ -54,4 +54,5 @@
  */
 - (void)readerDidCancel:(QRCodeReaderViewController *)reader;
 
+- (void)readerDidTapHelpButton:(QRCodeReaderViewController *)reader;
 @end
