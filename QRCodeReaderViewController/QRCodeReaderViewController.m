@@ -194,7 +194,7 @@
 //    [_switchCameraButton addTarget:self action:@selector(switchCameraAction:) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:_switchCameraButton];
 //  }
-  
+
     self.cancelButton = [[UIButton alloc] init];
     self.helpButton = [[UIButton alloc] init];
     
@@ -234,15 +234,15 @@
     [self.view addSubview:_imgShadow];
 }
 
-- (void)setupAutoLayoutConstraints
-{
+- (void)setupAutoLayoutConstraints{
+    
     NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel,_imgShadow,_helpButton);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_cancelButton(44)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_cancelButton(64)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_helpButton(44)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_helpButton(64)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_helpButton(60)]-0-|" options:0 metrics:nil views:views]];
     
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]|" options:0 metrics:nil views:views]];
