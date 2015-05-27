@@ -220,7 +220,8 @@
     [_navigationBarView addSubview:_cancelButton];
     
     _helpButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_helpButton setTitle:@"Help" forState:UIControlStateNormal];
+    [_helpButton setTitle:@"" forState:UIControlStateNormal];
+    [_helpButton setImage:[UIImage imageNamed:@"icn-learn"] forState:UIControlStateNormal];
     UIFont *fontHelp = [UIFont fontWithName : @"DINPro" size : 22];
     [_helpButton.titleLabel setFont:fontHelp];
     [_helpButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
@@ -238,10 +239,10 @@
     NSDictionary *views = NSDictionaryOfVariableBindings(_navigationBarView, _cameraView, _cancelButton,_titleLabel,_imgShadow,_helpButton);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[_navigationBarView(64)]-(0)-[_imgShadow(9)]-(-9)-[_cameraView]-(0)-|" options:0 metrics:nil views:views]];
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_cancelButton(30)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_cancelButton(44)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_cancelButton(60)]" options:0 metrics:nil views:views]];
     
-    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_helpButton(30)]" options:0 metrics:nil views:views]];
+    [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-17-[_helpButton(44)]" options:0 metrics:nil views:views]];
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_helpButton(60)]-0-|" options:0 metrics:nil views:views]];
     
     [self.navigationBarView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[_titleLabel]|" options:0 metrics:nil views:views]];
