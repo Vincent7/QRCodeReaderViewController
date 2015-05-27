@@ -221,7 +221,7 @@
     
     _helpButton.translatesAutoresizingMaskIntoConstraints = NO;
     [_helpButton setTitle:@"" forState:UIControlStateNormal];
-    [_helpButton setImage:[UIImage imageNamed:@"icn-learn"] forState:UIControlStateNormal];
+    [_helpButton setImage:[UIImage imageNamed:@"btn-learn"] forState:UIControlStateNormal];
     UIFont *fontHelp = [UIFont fontWithName : @"DINPro" size : 22];
     [_helpButton.titleLabel setFont:fontHelp];
     [_helpButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
