@@ -204,7 +204,7 @@
     [self.view addSubview:_navigationBarView];
     
     self.titleLabel = [[UILabel alloc] init];
-    [self.titleLabel setText:@"Scan QRcode"];
+    [self.titleLabel setText:NSLocalizedString(@"Scan QRcode",nil)];
     [self.titleLabel setFont:[UIFont fontWithName : @"DINPro" size : 22]];
     [self.titleLabel setTextColor:[UIColor whiteColor]];
     self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
