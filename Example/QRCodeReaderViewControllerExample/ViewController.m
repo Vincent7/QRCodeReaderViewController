@@ -51,11 +51,6 @@
     
     [self presentViewController:reader animated:YES completion:NULL];
   }
-  else {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alert show];
-  }
 }
 
 #pragma mark - QRCodeReader Delegate Methods

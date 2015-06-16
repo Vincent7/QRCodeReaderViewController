@@ -61,7 +61,7 @@
  * @return a Boolean value indicating whether the reader is available.
  * @since 3.0.0
  */
-+ (BOOL)isAvailable;
++ (NSError *)isAvailable;
 
 /**
  * @abstract Checks and return whether the given metadata object types are

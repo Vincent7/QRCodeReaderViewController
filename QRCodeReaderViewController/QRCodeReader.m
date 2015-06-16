@@ -152,55 +152,75 @@
 
 #pragma mark - Checking the Reader Availabilities
 
-+ (BOOL)isAvailable
++ (NSError*)isAvailable
 {
   @autoreleasepool {
     AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
-    if (!captureDevice) {
-      return NO;
-    }
-    
     NSError *error;
+    
     AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:&error];
     
     if (!deviceInput || error) {
-      return NO;
+      return error;
     }
     
-    return YES;
+    return nil;
   }
 }
 
 + (BOOL)supportsMetadataObjectTypes:(NSArray *)metadataObjectTypes
 {
-  if (![self isAvailable]) {
-    return NO;
-  }
-  
-  @autoreleasepool {
-    // Setup components
-    AVCaptureDevice *captureDevice    = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:nil];
-    AVCaptureMetadataOutput *output   = [[AVCaptureMetadataOutput alloc] init];
-    AVCaptureSession *session         = [[AVCaptureSession alloc] init];
-    
-    [session addInput:deviceInput];
-    [session addOutput:output];
-    
-    if (metadataObjectTypes == nil || metadataObjectTypes.count == 0) {
-      // Check the QRCode metadata object type by default
-      metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
-    }
-    
-    for (NSString *metadataObjectType in metadataObjectTypes) {
-      if (![output.availableMetadataObjectTypes containsObject:metadataObjectType]) {
+    NSError *error = [self isAvailable];
+    if (error) {
+        NSString *title;
+        NSString *message;
+        switch (error.code) {
+            case AVErrorApplicationIsNotAuthorizedToUseDevice:{
+                title = NSLocalizedString(@"QRCode.ErrorAlert.Title", @"");
+                message = NSLocalizedString(@"QRCode.NotAuthorizedErrorAlert.Message", @"");
+                break;
+            }
+            
+            default:{
+                title = NSLocalizedString(@"QRCode.ErrorAlert.Title", @"");
+                message = NSLocalizedString(@"QRCode.OtherErrorAlert.Message", @"");
+                break;
+            }
+        }
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle:title
+                              message:message
+                              delegate:nil
+                              cancelButtonTitle:NSLocalizedString(@"OK", @"")
+                              otherButtonTitles:nil];
+        
+        [alert show];
         return NO;
-      }
     }
-    
-    return YES;
-  }
+  
+    @autoreleasepool {
+        // Setup components
+        AVCaptureDevice *captureDevice    = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        AVCaptureDeviceInput *deviceInput = [AVCaptureDeviceInput deviceInputWithDevice:captureDevice error:nil];
+        AVCaptureMetadataOutput *output   = [[AVCaptureMetadataOutput alloc] init];
+        AVCaptureSession *session         = [[AVCaptureSession alloc] init];
+
+        [session addInput:deviceInput];
+        [session addOutput:output];
+
+        if (metadataObjectTypes == nil || metadataObjectTypes.count == 0) {
+            // Check the QRCode metadata object type by default
+            metadataObjectTypes = @[AVMetadataObjectTypeQRCode];
+        }
+
+        for (NSString *metadataObjectType in metadataObjectTypes) {
+            if (![output.availableMetadataObjectTypes containsObject:metadataObjectType]) {
+                return NO;
+            }
+        }
+
+        return YES;
+    }
 }
 
 #pragma mark - Managing the Block
